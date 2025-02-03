@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="adminPanel.css">
+</head>
+<body>
+
+    <h2>Admin Panel</h2>
+
+    <!-- Section to Add a New Car -->
+    <div class="form-section">
+        <h3>Add a New Car</h3>
+        <form id="add-car-form">
+            <label for="car-plate">Car Plate:</label>
+            <input type="text" id="car-plate" name="car_plate" placeholder="Enter car plate" required>
+
+            <label for="driver-name">Driver Name:</label>
+            <input type="text" id="driver-name" name="driver_name" placeholder="Enter driver name" required>
+
+            <label for="availability">Is Available:</label>
+            <select id="availability" name="availability" required>
+                <option value="true">Yes</option>
+                <option value="false">No</option>
+            </select>
+
+            <button type="button" id="add-car-button">Add Car</button>
+        </form>
+    </div>
+
+    <!-- Section to View Pending Requests -->
+    <h3>Pending Requests</h3>
+    <table id="pending-requests-table">
+        <thead>
+            <tr>
+                <th>Request ID</th>
+                <th>User</th>
+                <th>Date Needed</th>
+                <th>Return Date</th>
+                <th>Destination</th>
+                <th>Event</th>
+                <th>Assign Car</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Pending requests will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <!-- Section to View Cars -->
+    <h3>Available Cars</h3>
+    <table id="cars-table">
+        <thead>
+            <tr>
+                <th>Car Plate</th>
+                <th>Driver</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Cars will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script src="adminPanel.js"></script>
+
+</body>
+</html>

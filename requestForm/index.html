@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Request Form</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+
+<h2 style="text-align: center;">Bej kerkese per te perdorur makinat e federates.</h2>
+
+<form action="submit_request.php" method="POST">
+
+    <!-- Name Field -->
+    <label for="first-name">Emri:</label>
+    <input type="text" id="first-name" name="first_name" placeholder="Enter your first name" required>
+
+    <!-- Surname Field -->
+    <label for="last-name">Mbiemri:</label>
+    <input type="text" id="last-name" name="last_name" placeholder="Enter your last name" required>
+
+    <!-- Date Field -->
+    <label for="date_get">Data qe ju nevojitet makina:</label>
+    <input type="date" id="date_get" name="date_get" required>
+
+    <label for="date_turn">Data e mundshme e kthimit:</label>
+    <input type="date" id="date_turn" name="date_turn" required>
+
+    <!-- Destination Field -->
+    <label for="destination">Destinacioni ku keni per te shkuar:</label>
+    <input type="text" id="destination" name="destination" placeholder="Enter the destination" required>
+
+    <!-- Event Description Field -->
+    <label for="event-description">Eventi qe do te merrni pjese:</label>
+    <textarea id="event-description" name="event_description" placeholder="Provide details about the event" rows="4" required></textarea>
+
+    <!-- Submit Button -->
+    <button type="submit">Dergo Kerkesen</button>
+</form>
+
+</body>
+</html>

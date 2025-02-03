@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Panel</title>
+    <link rel="stylesheet" href="driverPanel.css">
+</head>
+<body>
+
+    <h2>Driver Panel</h2>
+
+    <div id="notifications" class="notification" style="display: none;">
+        You have a new assignment!
+    </div>
+
+    <h3>Your Assigned Cars</h3>
+    <table id="assigned-cars-table">
+        <thead>
+            <tr>
+                <th>Car Plate</th>
+                <th>User</th>
+                <th>Date Needed</th>
+                <th>Return Date</th>
+                <th>Destination</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Assigned cars will be dynamically inserted here -->
+        </tbody>
+    </table>
+
+    <script src="driverPanel.js"></script>
+
+</body>
+</html>
