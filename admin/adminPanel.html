@@ -10,6 +10,15 @@
 
     <h2>Admin Panel</h2>
 
+    <div style="position: absolute; top: 10px; left: 10px;">
+        <div class="menu" onclick="toggleMenu()">☰</div>
+        <button class="logout-button" onclick="window.location.href='../regist/sign_log.html'">LogOut</button>
+    </div>
+
+    <div class="regist_employee">
+        <a href="registrationForm.html" target="_blank">Regjistro nje punonjes te ri ne sistem.</a>
+    </div>
+
     <!-- Section to Add a New Car -->
     <div class="form-section">
         <h3>Add a New Car</h3>
@@ -61,6 +70,18 @@
         </thead>
         <tbody>
             <!-- Cars will be dynamically inserted here -->
+            <tr>
+                <td>ABC123</td>
+                <td>John Doe</td>
+                <td>
+                    <select class="status-dropdown">
+                        <option value="available">Available</option>
+                        <option value="unavailable">Unavailable</option>
+                        <option value="in_service">In Service</option>
+                    </select>
+                </td>
+            </tr>
+            <!-- Additional car rows will be added dynamically -->
         </tbody>
     </table>
 

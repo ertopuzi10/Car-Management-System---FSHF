@@ -28,6 +28,21 @@ $return_date = $_POST['date_turn'];
 $destination = $_POST['destination'];
 $event_description = $_POST['event_description'];
 
+// Check for time inputs and combine with date if provided
+if ($_POST['time_format'] === 'hours') {
+    if (empty($_POST['time_get']) || empty($_POST['time_turn'])) {
+        die("Error: Time inputs are required when selecting hours.");
+    } else {
+        $date_needed .= ' ' . $_POST['time_get']; // Combine date and time
+        $return_date .= ' ' . $_POST['time_turn']; // Combine date and time
+    }
+} else {
+    // Only use the date without time
+    // Ensure no time is appended
+    $date_needed = $_POST['date_get'];
+    $return_date = $_POST['date_turn'];
+}
+
 // Debugging output
 echo "Inserting values: $first_name, $last_name, $date_needed, $return_date, $destination, $event_description\n";
 
@@ -40,3 +55,4 @@ if ($stmt->execute()) {
 $stmt->close();
 $conn->close();
 ?>
+

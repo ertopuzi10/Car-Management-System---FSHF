@@ -36,3 +36,42 @@ input, select {
     padding: 5px;
     margin: 5px 0;
 }
+
+/* New styles for regist_employee div */
+.regist_employee {
+    padding: 15px;
+    margin: 20px 0;
+    background-color: #e7f3fe;
+    border: 1px solid #b3d7ff;
+    border-radius: 5px;
+    text-align: center;
+}
+.regist_employee a {
+    color: #007BFF;
+    font-size: 18px;
+    text-decoration: none;
+}
+.regist_employee a:hover {
+    text-decoration: underline;
+}
+
+button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: #0056b3;
+}
+
+/*styles for hamburger menu*/
+.menu {
+    cursor: pointer;
+    font-size: 30px;
+    display: inline-block;
+}
+.logout-button {
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+}

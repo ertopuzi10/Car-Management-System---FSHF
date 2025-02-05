@@ -32,3 +32,14 @@ button {
 button:hover {
     background-color: #0056b3;
 }
+
+/* New styles for the hamburger menu and logout button */
+.menu {
+    cursor: pointer;
+    font-size: 30px;
+    display: inline-block;
+}
+.logout-button {
+    display: none; /* Initially hidden */
+    margin-top: 10px;
+}

@@ -35,3 +35,8 @@ function checkForNotifications() {
 
 // Check for notifications every 2 seconds
 setInterval(checkForNotifications, 2000);
+
+function toggleMenu() {
+    const logoutButton = document.querySelector('.logout-button');
+    logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
+}

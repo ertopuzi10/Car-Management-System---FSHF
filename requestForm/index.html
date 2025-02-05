@@ -5,8 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Request Form</title>
     <link rel="stylesheet" href="index.css">
+    <style>
+        .menu {
+            cursor: pointer;
+            font-size: 30px;
+            display: inline-block;
+        }
+        .logout-button {
+            display: none; /* Initially hidden */
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
+
+<div style="position: absolute; top: 10px; left: 10px;">
+    <div class="menu" onclick="toggleMenu()">☰</div>
+    <button class="logout-button" onclick="window.location.href='../regist/sign_log.html'">LogOut</button>
+</div>
 
 <h2 style="text-align: center;">Bej kerkese per te perdorur makinat e federates.</h2>
 
@@ -20,12 +36,21 @@
     <label for="last-name">Mbiemri:</label>
     <input type="text" id="last-name" name="last_name" placeholder="Enter your last name" required>
 
-    <!-- Date Field -->
-    <label for="date_get">Data qe ju nevojitet makina:</label>
-    <input type="date" id="date_get" name="date_get" required>
+    <!-- Time Format Selection -->
+    <label for="time_format">Formati i kohës:</label>
+    <select id="time_format" name="time_format" required>
+        <option value="hours">Orë</option>
+        <option value="days">Ditë</option>
+    </select>
 
-    <label for="date_turn">Data e mundshme e kthimit:</label>
+    <!-- Date Field -->
+    <label for="date_get">Koha qe ju nevojitet makina:</label>
+    <input type="date" id="date_get" name="date_get" required>
+    <input type="time" id="time_get" name="time_get" style="display:none;">
+
+    <label for="date_turn">Koha e mundshme e kthimit:</label>
     <input type="date" id="date_turn" name="date_turn" required>
+    <input type="time" id="time_turn" name="time_turn" style="display:none;">
 
     <!-- Destination Field -->
     <label for="destination">Destinacioni ku keni per te shkuar:</label>
@@ -38,6 +63,21 @@
     <!-- Submit Button -->
     <button type="submit">Dergo Kerkesen</button>
 </form>
+
+
+<script>
+    function toggleMenu() {
+        const logoutButton = document.querySelector('.logout-button');
+        logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
+    }
+
+    // Show/hide time inputs based on selected time format
+    document.getElementById("time_format").addEventListener("change", function(event) {
+        const isHours = event.target.value === "hours";
+        document.getElementById("time_get").style.display = isHours ? "block" : "none";
+        document.getElementById("time_turn").style.display = isHours ? "block" : "none";
+    });
+</script>
 
 </body>
 </html>

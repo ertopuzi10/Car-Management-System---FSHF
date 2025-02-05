@@ -11,6 +11,7 @@ fetch('http://localhost/fetch_requests.php') // Updated to reflect new location
         const requestsTableBody = document.getElementById("pending-requests-table").querySelector("tbody");
         data.forEach(request => {
             const row = document.createElement("tr");
+            row.setAttribute("data-return-time", request.return_date); // Store return time in a data attribute
             row.innerHTML = `
                 <td>${request.id}</td>
                 <td>${request.first_name} ${request.last_name}</td>
@@ -27,10 +28,10 @@ fetch('http://localhost/fetch_requests.php') // Updated to reflect new location
             `;
             requestsTableBody.appendChild(row);
         });
+        monitorReturnTimes(); // Start monitoring return times
     })
     .catch(error => console.error('Error fetching pending requests:', error));
 
-// Populate Cars Table
 function populateCarsTable() {
     const carsTableBody = document.getElementById("cars-table").querySelector("tbody");
     carsTableBody.innerHTML = ""; // Clear existing rows
@@ -39,10 +40,39 @@ function populateCarsTable() {
         row.innerHTML = `
             <td>${car.plate}</td>
             <td>${car.driver}</td>
-            <td>${car.isAvailable ? "Available" : "Unavailable"}</td>
+            <td>
+                <select class="status-dropdown" onchange="updateCarStatus('${car.plate}', this.value)">
+                    <option value="available" ${car.isAvailable ? 'selected' : ''}>Available</option>
+                    <option value="unavailable" ${!car.isAvailable ? 'selected' : ''}>Unavailable</option>
+                    <option value="in_service">In Service</option>
+                </select>
+            </td>
         `;
         carsTableBody.appendChild(row);
     });
+}
+
+// Update Car Status Functionality
+function updateCarStatus(plate, status) {
+    const car = cars.find(car => car.plate === plate);
+    if (car) {
+        car.isAvailable = (status === "available");
+        // Optionally, send the updated status to the server
+        fetch('fetch_requests.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ plate: plate, status: car.isAvailable }),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Car status updated:', data);
+        })
+        .catch((error) => {
+            console.error('Error updating car status:', error);
+        });
+    }
 }
 
 // Assign Car Functionality
@@ -70,6 +100,21 @@ function assignCar(requestId, user, dateNeeded, returnDate, destination) {
     }
 }
 
+// Monitor Return Times
+function monitorReturnTimes() {
+    const rows = document.querySelectorAll("#pending-requests-table tbody tr");
+    const currentTime = new Date().getTime(); // Get current time in milliseconds
+
+    rows.forEach(row => {
+        const returnTime = new Date(row.getAttribute("data-return-time")).getTime(); // Get return time in milliseconds
+        if (currentTime >= returnTime) {
+            row.remove(); // Remove the row from the table
+        }
+    });
+
+    setTimeout(monitorReturnTimes, 60000); // Check every minute
+}
+
 // Add Car Functionality
 document.getElementById("add-car-button").addEventListener("click", () => {
     const carPlate = document.getElementById("car-plate").value;
@@ -94,4 +139,15 @@ document.getElementById("add-car-button").addEventListener("click", () => {
     alert("Car added successfully!");
 });
 
-populateCarsTable(); // Initial population of cars table
+// Logout button functionality
+document.getElementById('logout-button').addEventListener('click', function() {
+    window.location.href = 'sign_in_form.html'; // Redirect to the sign-in form
+});
+
+// Initial population of cars table
+populateCarsTable(); 
+
+function toggleMenu() {
+    const logoutButton = document.querySelector('.logout-button');
+    logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
+}
