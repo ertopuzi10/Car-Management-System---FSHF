@@ -19,6 +19,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Verify the password
         if (password_verify($password, $hashed_password)) {
+            // Set session variables
+            $_SESSION['loggedin'] = true;
+            $_SESSION['role'] = $role;
             echo "Login successful. Role: " . $role; // Return success message with role
         } else {
             echo "Invalid email or password."; // Return error message

@@ -9,9 +9,10 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    border: 2px solid red; /* Red border for all tables */
 }
 th, td {
-    border: 1px solid #ddd;
+    border: 2px solid red; /* Red border for table cells */
     padding: 10px;
     text-align: center;
 }
@@ -28,13 +29,13 @@ th {
 }
 
 button {
-    background-color: #007BFF;
-    color: white;
+    background-color: #ff0000; /* Button color */
+    color: black;
     border: none;
     cursor: pointer;
 }
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker button on hover */
 }
 
 /*styles for hamburger menu*/

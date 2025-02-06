@@ -9,9 +9,10 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
+    border: 2px solid red; /* Red border for all tables */
 }
 th, td {
-    border: 1px solid #ddd;
+    border: 2px solid red; /* Red border for table cells */
     padding: 10px;
     text-align: center;
 }
@@ -20,8 +21,8 @@ th {
 }
 button {
     padding: 5px 10px;
-    color: white;
-    background-color: #007BFF;
+    color: black;
+    background-color: #ff2600;
     border: none;
     cursor: pointer;
 }
@@ -36,6 +37,27 @@ input, select {
     padding: 5px;
     margin: 5px 0;
 }
+
+/* New styles for the add-car form */
+#add-car-form {
+    background-color: #f9f9f9; /* Light background for the form */
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+input, select {
+    width: calc(100% - 10px); /* Adjust width to account for padding */
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
 
 /* New styles for regist_employee div */
 .regist_employee {
@@ -53,16 +75,6 @@ input, select {
 }
 .regist_employee a:hover {
     text-decoration: underline;
-}
-
-button {
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-button:hover {
-    background-color: #0056b3;
 }
 
 /*styles for hamburger menu*/

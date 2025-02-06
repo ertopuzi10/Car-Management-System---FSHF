@@ -1,6 +1,7 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Helvetica Neue', Arial, sans-serif; /* Updated font family */
     margin: 20px;
+    background: linear-gradient(to right, #ff4d4d, #1a1a1a); /* Matching background */
 }
 form {
     max-width: 400px;
@@ -9,28 +10,36 @@ form {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9); /* Light background for the form */
 }
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
+    color: #333; /* Darker color for better readability */
 }
 input, select, textarea, button {
-    width: 100%;
+    width: calc(100% - 20px); /* Adjust width to account for padding */
     padding: 10px;
     margin-bottom: 15px;
+    margin-right: 10px; /* Add right margin */
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
+    background-color: #f9f9f9; /* Light background for inputs */
 }
 button {
-    background-color: #007BFF;
+    background-color: #007BFF; /* Button color */
     color: white;
     border: none;
     cursor: pointer;
+    margin-right: 10px; /* Add right margin to the logout button */
+    text-align: center; /* Center text horizontally */
+    line-height: 1.5; /* Adjust line height for vertical centering */
+    padding: 10px; /* Ensure padding is consistent */
 }
 button:hover {
-    background-color: #0056b3;
+    background-color: #0056b3; /* Darker button on hover */
 }
 
 /* New styles for the hamburger menu and logout button */

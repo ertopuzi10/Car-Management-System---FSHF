@@ -5,23 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Car Request Form</title>
     <link rel="stylesheet" href="index.css">
-    <style>
-        .menu {
-            cursor: pointer;
-            font-size: 30px;
-            display: inline-block;
-        }
-        .logout-button {
-            display: none; /* Initially hidden */
-            margin-top: 10px;
-        }
-    </style>
 </head>
 <body>
 
 <div style="position: absolute; top: 10px; left: 10px;">
     <div class="menu" onclick="toggleMenu()">☰</div>
-    <button class="logout-button" onclick="window.location.href='../regist/sign_log.html'">LogOut</button>
+    <button class="logout-button" onclick="removeSession()">LogOut</button>
 </div>
 
 <h2 style="text-align: center;">Bej kerkese per te perdorur makinat e federates.</h2>
@@ -65,19 +54,7 @@
 </form>
 
 
-<script>
-    function toggleMenu() {
-        const logoutButton = document.querySelector('.logout-button');
-        logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
-    }
-
-    // Show/hide time inputs based on selected time format
-    document.getElementById("time_format").addEventListener("change", function(event) {
-        const isHours = event.target.value === "hours";
-        document.getElementById("time_get").style.display = isHours ? "block" : "none";
-        document.getElementById("time_turn").style.display = isHours ? "block" : "none";
-    });
-</script>
+<script src="index.js"></script>
 
 </body>
 </html>

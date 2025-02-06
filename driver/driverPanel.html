@@ -1,3 +1,4 @@
+<?php include('../regist/session_check.php'); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
         <div class="menu" onclick="toggleMenu()">☰</div>
         <button class="logout-button" onclick="window.location.href='../regist/sign_log.html'">LogOut</button>
     </div>
-
+    
     <div id="notifications" class="notification" style="display: none;">
         You have a new assignment!
     </div>
@@ -34,6 +35,7 @@
             <!-- Assigned cars will be dynamically inserted here -->
         </tbody>
     </table>
+    <!-- Driver panel content goes here -->
 
     <script src="driverPanel.js"></script>
 

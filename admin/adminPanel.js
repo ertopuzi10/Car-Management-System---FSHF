@@ -5,7 +5,7 @@ const cars = [
 ]; // Initialize with default cars
 
 // Fetch pending requests from the backend
-fetch('http://localhost/fetch_requests.php') // Updated to reflect new location
+fetch('fetch_requests.php') // Updated to reflect new location
     .then(response => response.json())
     .then(data => {
         const requestsTableBody = document.getElementById("pending-requests-table").querySelector("tbody");
