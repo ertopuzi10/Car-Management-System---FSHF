@@ -1,4 +1,19 @@
-<?php include('../regist/session_check.php'); ?>
+<?php
+session_start();
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'driver') {
+    header("Location: ../regist/sign_log.php");
+    exit();
+}
+?>
+
+<?php
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +28,7 @@
 
     <div style="position: absolute; top: 10px; left: 10px;">
         <div class="menu" onclick="toggleMenu()">☰</div>
-        <button class="logout-button" onclick="window.location.href='../regist/sign_log.html'">LogOut</button>
+        <button class="logout-button" onclick="removeSession()">LogOut</button>
     </div>
     
     <div id="notifications" class="notification" style="display: none;">

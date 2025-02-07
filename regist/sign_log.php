@@ -1,3 +1,33 @@
+<!-- <?php
+session_start();
+if (isset($_SESSION['user_id'])) {
+    header("Location: panel.php"); // Redirect logged-in users
+    exit();
+}
+?> -->
+
+<?php
+session_start();
+
+// Check if user is already logged in
+if (isset($_SESSION['user_id']) && isset($_SESSION['role'])) {
+    $role = $_SESSION['role'];
+
+    // Redirect based on role
+    if ($role === 'admin') {
+        header("Location: ../admin/adminPanel.php");
+        exit();
+    } elseif ($role === 'driver') {
+        header("Location: ../driver/driverPanel.php");
+        exit();
+    } elseif ($role === 'departments_employee') {
+        header("Location: ../requestForm/index.php");
+        exit();
+    }
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

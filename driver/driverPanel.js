@@ -40,3 +40,12 @@ function toggleMenu() {
     const logoutButton = document.querySelector('.logout-button');
     logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
 }
+
+function removeSession() {
+    // Call PHP script to destroy session
+    fetch('../logout.php')
+    .then(response => {
+        // Redirect to login page after session is destroyed
+        window.location.href = '../regist/sign_log.php';
+    });
+}

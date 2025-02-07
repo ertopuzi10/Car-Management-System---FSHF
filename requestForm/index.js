@@ -20,10 +20,20 @@ document.getElementById("time_format").addEventListener("change", function(event
     document.getElementById("time_turn").style.display = isHours ? "block" : "none";
 });
 
-function removeSession(){
-    // Clear session storage or local storage if using token-based auth
-    sessionStorage.removeItem('authToken'); // or localStorage.removeItem('authToken');
+// function removeSession(){
+//     // Clear session storage or local storage if using token-based auth
+//     sessionStorage.removeItem('authToken'); // or localStorage.removeItem('authToken');
 
-    // Redirect to login page
-    window.location.href = '../regist/sign_log.html';
+//     // Redirect to login page
+//     window.location.href = '../regist/sign_log.html';
+// }
+
+
+function removeSession() {
+    // Call PHP script to destroy session
+    fetch('../logout.php')
+    .then(response => {
+        // Redirect to login page after session is destroyed
+        window.location.href = '../regist/sign_log.php';
+    });
 }

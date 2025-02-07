@@ -1,11 +1,7 @@
-const cars = [
-    { plate: "ABC123", driver: "John Doe", isAvailable: true },
-    { plate: "XYZ456", driver: "Jane Smith", isAvailable: true },
-    { plate: "LMN789", driver: "Alice Johnson", isAvailable: false }
-]; // Initialize with default cars
+let availableCars = []; // Store fetched cars
 
 // Fetch pending requests from the backend
-fetch('fetch_requests.php') // Updated to reflect new location
+fetch('fetch_requests.php')
     .then(response => response.json())
     .then(data => {
         const requestsTableBody = document.getElementById("pending-requests-table").querySelector("tbody");
@@ -21,7 +17,7 @@ fetch('fetch_requests.php') // Updated to reflect new location
                 <td>${request.event_description}</td>
                 <td>
                     <select id="car-select-${request.id}">
-                        ${cars.filter(car => car.isAvailable).map(car => `<option value="${car.plate}">${car.plate}</option>`).join('')}
+                        ${availableCars.filter(car => car.status === 'available').map(car => `<option value="${car.car_plate}">${car.car_plate}</option>`).join('')}
                     </select>
                     <button onclick="assignCar('${request.id}', '${request.first_name} ${request.last_name}', '${request.date_needed}', '${request.return_date}', '${request.destination}')">Assign</button>
                 </td>
@@ -32,73 +28,51 @@ fetch('fetch_requests.php') // Updated to reflect new location
     })
     .catch(error => console.error('Error fetching pending requests:', error));
 
-function populateCarsTable() {
-    const carsTableBody = document.getElementById("cars-table").querySelector("tbody");
-    carsTableBody.innerHTML = ""; // Clear existing rows
-    cars.forEach(car => {
-        const row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${car.plate}</td>
-            <td>${car.driver}</td>
-            <td>
-                <select class="status-dropdown" onchange="updateCarStatus('${car.plate}', this.value)">
-                    <option value="available" ${car.isAvailable ? 'selected' : ''}>Available</option>
-                    <option value="unavailable" ${!car.isAvailable ? 'selected' : ''}>Unavailable</option>
-                    <option value="in_service">In Service</option>
-                </select>
-            </td>
-        `;
-        carsTableBody.appendChild(row);
-    });
-}
-
-// Update Car Status Functionality
-function updateCarStatus(plate, status) {
-    const car = cars.find(car => car.plate === plate);
-    if (car) {
-        car.isAvailable = (status === "available");
-        // Optionally, send the updated status to the server
-        fetch('fetch_requests.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ plate: plate, status: car.isAvailable }),
-        })
+// Function to fetch available cars
+function fetchAvailableCars() {
+    fetch('fetch_cars.php')
         .then(response => response.json())
-        .then(data => {
-            console.log('Car status updated:', data);
+        .then(cars => {
+            availableCars = cars; // Store fetched cars
+            const carsTableBody = document.getElementById("cars-table").querySelector("tbody"); // Updated ID
+            carsTableBody.innerHTML = ""; // Clear existing rows
+            cars.forEach(car => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                    <td>${car.car_plate}</td>
+                    <td>${car.driver_name}</td>
+                    <td>
+                        <select class="status-dropdown" onchange="updateCarStatus('${car.car_plate}', this.value)">
+                            <option value="available" ${car.status === 'available' ? 'selected' : ''}>Available</option>
+                            <option value="unavailable" ${car.status === 'unavailable' ? 'selected' : ''}>Unavailable</option>
+                        </select>
+                    </td>
+                `;
+                carsTableBody.appendChild(row);
+            });
         })
-        .catch((error) => {
-            console.error('Error updating car status:', error);
-        });
-    }
+        .catch(error => console.error('Error fetching available cars:', error));
 }
 
-// Assign Car Functionality
-function assignCar(requestId, user, dateNeeded, returnDate, destination) {
-    const selectElement = document.getElementById(`car-select-${requestId}`);
-    const selectedCarPlate = selectElement.value;
-    const car = cars.find(car => car.plate === selectedCarPlate);
-    if (car && car.isAvailable) {
-        car.isAvailable = false; // Change car status to unavailable
-        populateCarsTable(); // Refresh the cars table
-
-        // Store assigned car information in localStorage
-        const assignedCar = {
-            plate: selectedCarPlate,
-            user: user,
-            dateNeeded: dateNeeded,
-            returnDate: returnDate,
-            destination: destination
-        };
-        window.localStorage.setItem("driverNotification", JSON.stringify(assignedCar));
-
-        alert(`Car ${selectedCarPlate} assigned successfully!`);
-    } else {
-        alert("Selected car is not available.");
-    }
+// Function to update car status
+function updateCarStatus(carPlate, status) {
+    fetch('update_car_status.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ plate: carPlate, status: status }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Car status updated:', data);
+        fetchAvailableCars(); // Refresh the available cars table
+    })
+    .catch(error => console.error('Error updating car status:', error));
 }
+
+// Call fetchAvailableCars when the admin panel loads
+fetchAvailableCars();
 
 // Monitor Return Times
 function monitorReturnTimes() {
@@ -115,39 +89,22 @@ function monitorReturnTimes() {
     setTimeout(monitorReturnTimes, 60000); // Check every minute
 }
 
-// Add Car Functionality
-document.getElementById("add-car-button").addEventListener("click", () => {
-    const carPlate = document.getElementById("car-plate").value;
-    const driverName = document.getElementById("driver-name").value;
-    const isAvailable = document.getElementById("availability").value === "true";
-
-    // Create new car object
-    const newCar = {
-        plate: carPlate,
-        driver: driverName,
-        isAvailable: isAvailable
-    };
-
-    // Add the new car to the cars array
-    cars.push(newCar);
-
-    // Update the cars table
-    populateCarsTable();
-
-    // Clear the form
-    document.getElementById("add-car-form").reset();
-    alert("Car added successfully!");
-});
-
 // Logout button functionality
 document.getElementById('logout-button').addEventListener('click', function() {
     window.location.href = 'sign_in_form.html'; // Redirect to the sign-in form
 });
 
-// Initial population of cars table
-populateCarsTable(); 
-
+// Function to toggle menu visibility
 function toggleMenu() {
     const logoutButton = document.querySelector('.logout-button');
     logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
+}
+
+function removeSession() {
+    // Call PHP script to destroy session
+    fetch('../logout.php')
+    .then(response => {
+        // Redirect to login page after session is destroyed
+        window.location.href = '../regist/sign_log.php';
+    });
 }
