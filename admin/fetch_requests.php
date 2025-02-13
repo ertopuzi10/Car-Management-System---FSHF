@@ -1,18 +1,19 @@
 <?php
-$servername = "localhost"; // Change if necessary
-$username = 'root'; //replace with your database username
-$password = ""; // Replace with your database password
-$dbname = "car_management"; //your database name
 
-// Create connection
+//kredencialet e DB ne mysql
+$servername = "localhost"; 
+$username = 'root'; 
+$password = ""; 
+$dbname = "car_management"; 
+
+// Lidhja me DB
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Fetch pending requests
+// Fetch te gjitha te dhenat nga tabela car_requests
 $sql = "SELECT * FROM car_requests";
 
 $result = $conn->query($sql);
@@ -30,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $plate = $data['plate'];
     $status = $data['status'];
 
-    // Update the car status in the database
+    // update - imi i statusit te makinave breda DB
     $sql = "UPDATE cars SET isAvailable = ? WHERE plate = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("is", $status, $plate);
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 }
 
-// Return the requests as JSON
+// kthimi kerkeses ne formen JSON
 header('Content-Type: application/json');
 echo json_encode($requests);
 

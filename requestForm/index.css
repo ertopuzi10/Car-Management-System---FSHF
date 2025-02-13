@@ -1,8 +1,9 @@
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif; /* Updated font family */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 20px;
-    background: linear-gradient(to right, #ff4d4d, #1a1a1a); /* Matching background */
+    background: linear-gradient(to right, #ff4d4d, #1a1a1a);
 }
+
 form {
     max-width: 400px;
     margin: auto;
@@ -10,45 +11,49 @@ form {
     border: 1px solid #ccc;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    background: rgba(255, 255, 255, 0.9); /* Light background for the form */
+    background: rgba(255, 255, 255, 0.9);
 }
+
 label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
-    color: #333; /* Darker color for better readability */
+    color: #333;
 }
+
 input, select, textarea, button {
-    width: calc(100% - 20px); /* Adjust width to account for padding */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 15px;
-    margin-right: 10px; /* Add right margin */
+    margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 16px;
-    background-color: #f9f9f9; /* Light background for inputs */
+    background-color: #f9f9f9;
 }
+
 button {
-    background-color: #007BFF; /* Button color */
+    background-color: #007BFF;
     color: white;
     border: none;
     cursor: pointer;
-    margin-right: 10px; /* Add right margin to the logout button */
-    text-align: center; /* Center text horizontally */
-    line-height: 1.5; /* Adjust line height for vertical centering */
-    padding: 10px; /* Ensure padding is consistent */
-}
-button:hover {
-    background-color: #0056b3; /* Darker button on hover */
+    margin-right: 10px;
+    text-align: center;
+    line-height: 1.5;
+    padding: 10px;
 }
 
-/* New styles for the hamburger menu and logout button */
+button:hover {
+    background-color: #0056b3;
+}
+
 .menu {
     cursor: pointer;
     font-size: 30px;
     display: inline-block;
 }
+
 .logout-button {
-    display: none; /* Initially hidden */
+    display: none;
     margin-top: 10px;
 }

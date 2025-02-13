@@ -24,7 +24,7 @@ header("Pragma: no-cache");
 </head>
 <body>
 
-    <h2>Driver Panel</h2>
+    <h2>Nderfaqja e shofereve.</h2>
 
     <div style="position: absolute; top: 10px; left: 10px;">
         <div class="menu" onclick="toggleMenu()">☰</div>
@@ -32,27 +32,27 @@ header("Pragma: no-cache");
     </div>
     
     <div id="notifications" class="notification" style="display: none;">
-        You have a new assignment!
+        Nje detyre e re eshte caktuar!
     </div>
 
-    <h3>Your Assigned Cars</h3>
+    <h3>Makinat e caktuara</h3>
     <table id="assigned-cars-table">
         <thead>
             <tr>
-                <th>Car Plate</th>
-                <th>User</th>
-                <th>Date Needed</th>
-                <th>Return Date</th>
-                <th>Destination</th>
+                <th>Targa e makines</th>
+                <th>Personi qe do transportohet </th>
+                <th>Data e nisjes</th>
+                <th>Data e kthimit</th>
+                <th>Destinacioni</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Assigned cars will be dynamically inserted here -->
+            <!-- makinat e selektuara -->
         </tbody>
     </table>
-    <!-- Driver panel content goes here -->
 
     <script src="driverPanel.js"></script>
+
 
 </body>
 </html>

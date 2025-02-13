@@ -12,7 +12,6 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +22,7 @@ header("Pragma: no-cache");
 </head>
 <body>
 
-    <h2>Admin Panel</h2>
+    <h2>Nderfaqja e administratorit.</h2>
 
     <div style="position: absolute; top: 10px; left: 10px;">
         <div class="menu" onclick="toggleMenu()">☰</div>
@@ -34,74 +33,69 @@ header("Pragma: no-cache");
         <a href="registrationForm.html" target="_blank">Regjistro nje punonjes te ri ne sistem.</a>
     </div>
 
-    <!-- Section to Add a New Car -->
+    <!-- From - section i cili shton nje makine te re -->
     <div class="form-section">
-        <h3>Add a New Car</h3>
+        <h3>Shto nje makine te re.</h3>
         <form id="add-car-form">
-            <label for="car-plate">Car Plate:</label>
-            <input type="text" id="car-plate" name="car_plate" placeholder="Enter car plate" required>
+            <label for="car-plate">Shkruaj targen:</label>
+            <input type="text" id="car-plate" name="car_plate" placeholder="Shkruaj targen e makines" required>
 
-            <label for="driver-name">Driver Name:</label>
-            <input type="text" id="driver-name" name="driver_name" placeholder="Enter driver name" required>
+            <label for="driver-name">Emri i shoferit:</label>
+            <input type="text" id="driver-name" name="driver_name" placeholder="Vendos emrin e shoferit perkates" required>
 
-            <label for="availability">Is Available:</label>
+            <label for="availability">Disponueshmeria:</label>
             <select id="availability" name="availability" required>
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+                <option value="true">Po</option>
+                <option value="false">Jo</option>
             </select>
 
-            <button type="button" id="add-car-button">Add Car</button>
+            <button type="button" id="add-car-button">Shtoje makinen</button>
         </form>
     </div>
 
-    <!-- Section to View Pending Requests -->
-    <h3>Pending Requests</h3>
+    <!-- Tabela e cila ruan kerkesat per perdorim makine -->
+    <h3>Kerkesat e kryera</h3>
     <table id="pending-requests-table">
         <thead>
             <tr>
-                <th>Request ID</th>
-                <th>User</th>
-                <th>Date Needed</th>
-                <th>Return Date</th>
-                <th>Destination</th>
-                <th>Event</th>
-                <th>Assign Car</th>
+                <th>ID Kerkeses</th>
+                <th>Personi kerkues</th>
+                <th>Data e nevojitur</th>
+                <th>Data e kthimit</th>
+                <th>Destinacioni</th>
+                <th>Eventi</th>
+                <th>Cakto makinen</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Pending requests will be dynamically inserted here -->
+            <!-- <tr>
+                <td>1</td>
+                <td>John Doe</td>
+                <td>2023-10-01</td>
+                <td>2023-10-05</td>
+                <td>City Center</td>
+                <td><button onclick="assignCar(1, 'John Doe', '2023-10-01', '2023-10-05', 'City Center', 'ABC123')">Assign</button></td>
+            </tr> -->
         </tbody>
     </table>
 
-    <!-- Section to View Cars -->
-    <h3>Available Cars</h3>
+    <!-- Seksioni i cili shfaq makinat e disponueshme -->
+    <h3>Makinat e Disponueshme</h3>
     <table id="cars-table">
         <thead>
             <tr>
-                <th>Car Plate</th>
-                <th>Driver</th>
-                <th>Status</th>
+                <th>Targa e makines</th>
+                <th>Shoferi</th>
+                <th>Statusi</th>
             </tr>
         </thead>
         <tbody>
-            <!-- Cars will be dynamically inserted here -->
-            <!-- <tr>
-                <td>ABC123</td>
-                <td>John Doe</td>
-                <td>
-                    <select class="status-dropdown">
-                        <option value="available">Available</option>
-                        <option value="unavailable">Unavailable</option>
-                        <option value="in_service">In Service</option>
-                    </select>
-                </td>
-            </tr> -->
-            <!-- Additional car rows will be added dynamically -->
+            <!-- vendi ku shfaqen makinat e disponueshme -->
         </tbody>
     </table>
 
-    
     <script src="adminPanel.js" defer></script>
+    <script src="assignCar.js" defer></script>
     <script src="cars.js" defer></script>
 
 </body>

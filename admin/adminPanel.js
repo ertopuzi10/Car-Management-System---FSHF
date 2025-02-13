@@ -1,13 +1,14 @@
-let availableCars = []; // Store fetched cars
+// array per te store makinat qe jane bere fetch from DB
+let availableCars = []; 
 
-// Fetch pending requests from the backend
+// fetching backend requests
 fetch('fetch_requests.php')
     .then(response => response.json())
     .then(data => {
         const requestsTableBody = document.getElementById("pending-requests-table").querySelector("tbody");
         data.forEach(request => {
             const row = document.createElement("tr");
-            row.setAttribute("data-return-time", request.return_date); // Store return time in a data attribute
+            row.setAttribute("data-return-time", request.return_date);
             row.innerHTML = `
                 <td>${request.id}</td>
                 <td>${request.first_name} ${request.last_name}</td>
@@ -24,18 +25,19 @@ fetch('fetch_requests.php')
             `;
             requestsTableBody.appendChild(row);
         });
-        monitorReturnTimes(); // Start monitoring return times
+        // monitorojme datat ne menyre qe kerkesa te fshihet kur data ben expire
+        monitorReturnTimes(); 
     })
     .catch(error => console.error('Error fetching pending requests:', error));
 
-// Function to fetch available cars
+// fetch makinat e disponueshme
 function fetchAvailableCars() {
     fetch('fetch_cars.php')
         .then(response => response.json())
         .then(cars => {
-            availableCars = cars; // Store fetched cars
-            const carsTableBody = document.getElementById("cars-table").querySelector("tbody"); // Updated ID
-            carsTableBody.innerHTML = ""; // Clear existing rows
+            availableCars = cars; 
+            const carsTableBody = document.getElementById("cars-table").querySelector("tbody");
+            carsTableBody.innerHTML = "";
             cars.forEach(car => {
                 const row = document.createElement("tr");
                 row.innerHTML = `
@@ -54,7 +56,7 @@ function fetchAvailableCars() {
         .catch(error => console.error('Error fetching available cars:', error));
 }
 
-// Function to update car status
+// update - ohet disponueshmeria e makines
 function updateCarStatus(carPlate, status) {
     fetch('update_car_status.php', {
         method: 'POST',
@@ -66,45 +68,39 @@ function updateCarStatus(carPlate, status) {
     .then(response => response.json())
     .then(data => {
         console.log('Car status updated:', data);
-        fetchAvailableCars(); // Refresh the available cars table
+        fetchAvailableCars(); 
     })
     .catch(error => console.error('Error updating car status:', error));
 }
 
-// Call fetchAvailableCars when the admin panel loads
+// kur paneli behet load shfaqen makinat e diponueshme
 fetchAvailableCars();
 
-// Monitor Return Times
+// monitorim kohor ne lidhje me datat e kthimit
 function monitorReturnTimes() {
     const rows = document.querySelectorAll("#pending-requests-table tbody tr");
-    const currentTime = new Date().getTime(); // Get current time in milliseconds
+    const currentTime = new Date().getTime();
 
     rows.forEach(row => {
-        const returnTime = new Date(row.getAttribute("data-return-time")).getTime(); // Get return time in milliseconds
+        const returnTime = new Date(row.getAttribute("data-return-time")).getTime();
         if (currentTime >= returnTime) {
-            row.remove(); // Remove the row from the table
+            row.remove();
         }
     });
 
-    setTimeout(monitorReturnTimes, 60000); // Check every minute
+    // kontrolli behet cdo minute
+    setTimeout(monitorReturnTimes, 60000);
 }
 
-// Logout button functionality
-document.getElementById('logout-button').addEventListener('click', function() {
-    window.location.href = 'sign_in_form.html'; // Redirect to the sign-in form
-});
-
-// Function to toggle menu visibility
+// toggle menu e cila permban log out button
 function toggleMenu() {
     const logoutButton = document.querySelector('.logout-button');
     logoutButton.style.display = logoutButton.style.display === 'none' ? 'block' : 'none';
 }
 
 function removeSession() {
-    // Call PHP script to destroy session
     fetch('../logout.php')
     .then(response => {
-        // Redirect to login page after session is destroyed
         window.location.href = '../regist/sign_log.php';
     });
 }

@@ -12,7 +12,7 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "SELECT car_plate, driver_name, status FROM cars";
+$sql = "SELECT car_plate, driver_name, start_date, return_date, destination FROM assigned_cars";
 $result = $conn->query($sql);
 
 $cars = array();

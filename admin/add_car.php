@@ -1,8 +1,10 @@
 <?php
+
+//kredencialet e DB ne mysql
 $servername = "localhost";
-$username = "root"; // Your MySQL username
-$password = ""; // Your MySQL password (empty if using default)
-$database = "car_management"; // Your database name
+$username = "root"; 
+$password = ""; 
+$database = "car_management"; 
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -11,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Get the raw POST data
+    // marrja e te dhenave me metoden POST
     $data = json_decode(file_get_contents("php://input"), true);
     
     $car_plate = $data['plate'];

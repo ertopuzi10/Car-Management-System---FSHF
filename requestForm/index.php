@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'departments_employee') {
     header("Location: ../regist/sign_log.php");
     exit();
 }
@@ -32,22 +32,22 @@ header("Pragma: no-cache");
 
 <form action="submit_request.php" method="POST">
 
-    <!-- Name Field -->
+    <!-- input- field per emrin -->
     <label for="first-name">Emri:</label>
     <input type="text" id="first-name" name="first_name" placeholder="Enter your first name" required>
 
-    <!-- Surname Field -->
+    <!-- input - field per mbiemrin -->
     <label for="last-name">Mbiemri:</label>
     <input type="text" id="last-name" name="last_name" placeholder="Enter your last name" required>
 
-    <!-- Time Format Selection -->
+    <!-- format per oren -->
     <label for="time_format">Formati i kohës:</label>
     <select id="time_format" name="time_format" required>
         <option value="hours">Orë</option>
         <option value="days">Ditë</option>
     </select>
 
-    <!-- Date Field -->
+    <!-- format per ditet -->
     <label for="date_get">Koha qe ju nevojitet makina:</label>
     <input type="date" id="date_get" name="date_get" required>
     <input type="time" id="time_get" name="time_get" style="display:none;">
@@ -56,11 +56,11 @@ header("Pragma: no-cache");
     <input type="date" id="date_turn" name="date_turn" required>
     <input type="time" id="time_turn" name="time_turn" style="display:none;">
 
-    <!-- Destination Field -->
+    <!-- input - field per destinacionin -->
     <label for="destination">Destinacioni ku keni per te shkuar:</label>
     <input type="text" id="destination" name="destination" placeholder="Enter the destination" required>
 
-    <!-- Event Description Field -->
+    <!-- input - field per pershkrimin e eventit -->
     <label for="event-description">Eventi qe do te merrni pjese:</label>
     <textarea id="event-description" name="event_description" placeholder="Provide details about the event" rows="4" required></textarea>
 

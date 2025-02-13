@@ -1,5 +1,8 @@
 <?php
 session_start();
+error_reporting(E_ALL); // Enable error reporting
+ini_set('display_errors', 1); // Display errors on the page
+
 include('database_connection.php'); // Ensure this file exists and is correct
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,7 +25,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $id;
             $_SESSION['role'] = $role;
 
+            // Debugging output to check session variables
+            error_log("User ID: " . $_SESSION['user_id']);
+            error_log("User Role: " . $_SESSION['role']);
+            // Debugging output to check session variables
+            error_log("User ID: " . $_SESSION['user_id']);
+            error_log("User Role: " . $_SESSION['role']);
+            // Redirect based on role
+
+
+            if ($role === 'admin') {
             echo json_encode(["status" => "success", "role" => $role]);
+
+            } elseif ($role === 'driver') {
+            echo json_encode(["status" => "success", "role" => $role]);
+
+            } elseif ($role === 'departments_employee') {
+            echo json_encode(["status" => "success", "role" => $role]);
+
+            }
+            exit();
+
         } else {
             echo json_encode(["status" => "error", "message" => "Invalid email or password"]);
         }

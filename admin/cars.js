@@ -6,7 +6,7 @@ const cars = [
 
 function populateCarsTable() {
     const carsTableBody = document.getElementById("cars-table").querySelector("tbody");
-    carsTableBody.innerHTML = ""; // Clear existing rows
+    carsTableBody.innerHTML = ""; 
     cars.forEach(car => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -24,12 +24,12 @@ function populateCarsTable() {
     });
 }
 
-// Update Car Status Functionality
+// Update statusi i makines
 function updateCarStatus(plate, status) {
     const car = cars.find(car => car.plate === plate);
     if (car) {
         car.isAvailable = (status === "available");
-        // Optionally, send the updated status to the server
+        // kalimi i statusit te updatur ne server
         fetch('fetch_requests.php', {
             method: 'POST',
             headers: {
@@ -47,18 +47,17 @@ function updateCarStatus(plate, status) {
     }
 }
 
-// Assign Car Functionality
 function assignCar(requestId, user, dateNeeded, returnDate, destination) {
     const selectElement = document.getElementById(`car-select-${requestId}`);
     const selectedCarPlate = selectElement.value;
 
-    // Check if the selected car is in the availableCars array
+    // kontrollo nqs makina e selektuar eshte ne listen availableCars
     const car = availableCars.find(car => car.car_plate === selectedCarPlate);
     if (car && car.status === 'available') {
-        car.status = 'unavailable'; // Change car status to unavailable
-        populateCarsTable(); // Refresh the cars table
+        car.status = 'unavailable'; 
+        populateCarsTable(); 
 
-        // Store assigned car information in localStorage
+        // Ruajme makinat e selektuara ne memorie lokale
         const assignedCar = {
             plate: selectedCarPlate,
             user: user,
@@ -74,23 +73,22 @@ function assignCar(requestId, user, dateNeeded, returnDate, destination) {
     }
 }
 
-// Add Car Functionality
+// Funksioni i cili shton nje makine
 document.getElementById("add-car-button").addEventListener("click", () => {
     const carPlate = document.getElementById("car-plate").value;
     const driverName = document.getElementById("driver-name").value;
     const isAvailable = document.getElementById("availability").value === "true";
 
-    // Create new car object
+    // krijojme objektin e ri
     const newCar = {
         plate: carPlate,
         driver: driverName,
         isAvailable: isAvailable
     };
 
-    // Add the new car to the cars array
     cars.push(newCar);
 
-    // Send the new car data to the server
+    // te dhenat e makines se re ne server
     fetch('add_car.php', {
         method: 'POST',
         headers: {
@@ -101,9 +99,7 @@ document.getElementById("add-car-button").addEventListener("click", () => {
     .then(response => response.json())
     .then(data => {
         console.log('Car added:', data);
-        // Update the cars table
-        // populateCarsTable();
-        // Clear the form
+        populateCarsTable();
         document.getElementById("add-car-form").reset();
         alert("Car added successfully!");
     })
