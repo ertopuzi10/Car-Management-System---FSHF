@@ -2,7 +2,7 @@
 session_start();
 
 //lidhja me DB nepermjet nje flete te jashtme
-include('database_connection.php'); 
+require_once('../DB-conn/database_connection.php'); 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $email = $_POST['email'];

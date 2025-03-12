@@ -1,99 +1,116 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+  font-family: Arial, sans-serif;
+  margin: 20px;
 }
 
 h2 {
-    text-align: center;
+  text-align: center;
 }
 
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    border: 2px solid red;
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  border: 2px solid red;
 }
 
-th, td {
-    border: 2px solid red;
-    padding: 10px;
-    text-align: center;
+th,
+td {
+  border: 2px solid red;
+  padding: 10px;
+  text-align: center;
 }
 
 th {
-    background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 button {
-    padding: 5px 10px;
-    color: white;
-    background-color: #ff2600;
-    border: none;
-    cursor: pointer;
+  background-color: black; /* Black buttons */
+  color: white;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 5px; /* Added border radius */
+}
+
+button:hover {
+  background-color: #333; /* Darker shade on hover */
 }
 
 button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
+  background-color: #ccc;
+  cursor: not-allowed;
 }
 
 .form-section {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-input, select {
-    padding: 5px;
-    margin: 5px 0;
+input,
+select {
+  padding: 5px;
+  margin: 5px 0;
 }
-
 
 #add-car-form {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
 }
 
-input, select {
-    width: calc(100% - 10px);
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+input,
+select {
+  width: calc(100% - 10px);
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .regist_employee {
-    padding: 15px;
-    margin: 20px 0;
-    background-color: #e7f3fe;
-    border: 1px solid #b3d7ff;
-    border-radius: 5px;
-    text-align: center;
+  padding: 15px;
+  margin: 20px 0;
+  background-color: #e7f3fe;
+  border: 1px solid #b3d7ff;
+  border-radius: 5px;
+  text-align: center;
 }
 
 .regist_employee a {
-    color: #007BFF;
-    font-size: 18px;
-    text-decoration: none;
+  color: #007bff;
+  font-size: 18px;
+  text-decoration: none;
 }
 
 .regist_employee a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .menu {
-    cursor: pointer;
-    font-size: 30px;
-    display: inline-block;
+  cursor: pointer;
+  font-size: 30px;
+  display: inline-block;
 }
 
 .logout-button {
-    display: none; 
-    margin-top: 10px;
+  display: none;
+  margin-top: 10px;
+  padding: 10px; /* Added padding */
+  background-color: black; /* Black buttons */
+  color: white;
+  border: none;
+  border-radius: 5px; /* Added border radius */
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #333; /* Darker shade on hover */
 }

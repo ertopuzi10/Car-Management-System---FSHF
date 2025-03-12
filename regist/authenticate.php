@@ -1,15 +1,14 @@
 <?php
 session_start();
-error_reporting(E_ALL); // Enable error reporting
-ini_set('display_errors', 1); // Display errors on the page
+error_reporting(E_ALL); // report per gabime te mundshme
+ini_set('display_errors', 1); 
 
-include('database_connection.php'); // Ensure this file exists and is correct
+require_once('../DB-conn/database_connection.php'); // lidhja me DB
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-    // Use the correct table name (`employee` or `employees`)
     $query = "SELECT id, role, password FROM employees WHERE email = ?";
     $stmt = $conn->prepare($query);
     $stmt->bind_param("s", $email);
@@ -20,18 +19,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($id, $role, $hashed_password);
         $stmt->fetch();
 
-        // Verify the password
+
         if (password_verify($password, $hashed_password)) {
             $_SESSION['user_id'] = $id;
             $_SESSION['role'] = $role;
 
-            // Debugging output to check session variables
             error_log("User ID: " . $_SESSION['user_id']);
             error_log("User Role: " . $_SESSION['role']);
-            // Debugging output to check session variables
             error_log("User ID: " . $_SESSION['user_id']);
             error_log("User Role: " . $_SESSION['role']);
-            // Redirect based on role
+
 
 
             if ($role === 'admin') {

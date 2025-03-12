@@ -1,103 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Register New Employee</title>
-    
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        h3 {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select, button {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        button {
-            background-color: #5cb85c;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #4cae4c;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #8b4513;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      form {
+        background: #fff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        max-width: 400px;
+        width: 100%;
+      }
+      button {
+        background-color: black;
+        color: white;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+      }
+      button:hover {
+        background-color: #333;
+      }
+
+      h3 {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+      input,
+      select {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
     </style>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('registerEmployeeForm').addEventListener('submit', function(event) {
-                event.preventDefault();
-                
-                const formData = new FormData(this);
-                
-                fetch('registerEmployee.php', {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.text())
-                .then(data => {
-                    alert(data);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                });
-            });
-        });
+      document.addEventListener("DOMContentLoaded", function () {
+        document
+          .getElementById("registerEmployeeForm")
+          .addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const formData = new FormData(this);
+
+            fetch("registerEmployee.php", {
+              method: "POST",
+              body: formData,
+            })
+              .then((response) => response.text())
+              .then((data) => {
+                alert(data);
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          });
+      });
     </script>
+  </head>
 
-</head>
-
-<body>
-    
+  <body>
     <form id="registerEmployeeForm">
-        <h3>Regjistro nje punonjes te ri ne sistem</h3>
-        
-        <div>
-            <label for="name">Emri i punonjesit:</label>
-            <input type="text" id="name" name="name" required>
-        </div>
-      
-        <div>
-            <label for="email">Email-i:</label>
-            <input type="email" id="email" name="email" required>
-        </div>
-      
-        <div>
-            <label for="password">Password-i:</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-      
-        <div>
-            <label for="role">Roli ne kompani:</label>
-            <select id="role" name="role" required>
-                <option value="departments_employee">Punonjes departamenti</option>
-                <option value="driver">Shofer</option>
-                <option value="admin">Administrator</option>
-            </select>
-        </div>
-      
-        <button type="submit">Regjistro punonjesin</button>
+      <h3>Regjistro nje punonjes te ri ne sistem</h3>
+
+      <div>
+        <label for="name">Emri i punonjesit:</label>
+        <input type="text" id="name" name="name" required />
+      </div>
+
+      <div>
+        <label for="email">Email-i:</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+
+      <div>
+        <label for="password">Password-i:</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+
+      <div>
+        <label for="role">Roli ne kompani:</label>
+        <select id="role" name="role" required>
+          <option value="departments_employee">Punonjes departamenti</option>
+          <option value="driver">Shofer</option>
+          <option value="admin">Administrator</option>
+        </select>
+      </div>
+
+      <button type="submit">Regjistro punonjesin</button>
     </form>
-    
-</body>
+  </body>
 </html>

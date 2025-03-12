@@ -1,47 +1,47 @@
 <?php
+require_once('../DB-conn/database_connection.php'); // Lidhja me databazën
+header("Content-Type: application/json");
 
-//kredencialet e DB ne mysql
-$servername = "localhost";
-$username = "root"; 
-$password = ""; 
-$database = "car_management"; 
+// Marrim të dhënat nga kërkesa
+$data = json_decode(file_get_contents("php://input"), true);
 
-$conn = new mysqli($servername, $username, $password, $database);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!isset($data['request_id']) || !isset($data['car_plate'])) {
+    echo json_encode(["success" => false, "message" => "Të dhëna të paplota."]);
+    exit();
 }
 
-$input = json_decode(file_get_contents("php://input"), true);
-$car_plate = $input['car_plate'];
-$driver_name = $input['driver_name'];
-$start_date = $input['start_date'];
-$return_date = $input['return_date'];
-$destination = $input['destination'];
+$request_id = $data['request_id'];
+$car_plate = $data['car_plate'];
 
-
-
-$sql = "INSERT INTO assigned_cars (car_plate, driver_name, start_date, return_date, destination) VALUES (?, ?, ?, ?, ?)";
-error_log("SQL: " . $sql); // SQL debugging
-
-error_log("SQL: " . $sql); // SQL debugging
-
+// Marrim ID e makinës nga tabela `cars`
+$sql = "SELECT id FROM cars WHERE car_plate = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("sssss", $car_plate, $driver_name, $start_date, $return_date, $destination);
+$stmt->bind_param("s", $car_plate);
+$stmt->execute();
+$result = $stmt->get_result();
+$car = $result->fetch_assoc();
 
-if ($stmt->execute()) {
-    error_log("Car assigned successfully."); 
-
-    error_log("Car assigned successfully."); 
-
-    echo "Car assigned successfully.";
-} else {
-    error_log("Error: " . $stmt->error); 
-    echo "Error: " . $stmt->error;
-
-
+if (!$car) {
+    echo json_encode(["success" => false, "message" => "Makinë e papërcaktuar."]);
+    exit();
 }
 
-$stmt->close();
-$conn->close();
+$car_id = $car['id'];
+
+// Përditësojmë `car_id` në `car_requests`
+$update_request = "UPDATE car_requests SET car_id = ? WHERE id = ?";
+$update_stmt = $conn->prepare($update_request);
+$update_stmt->bind_param("ii", $car_id, $request_id);
+$update_stmt->execute();
+
+// Përditësojmë statusin e makinës në `cars` në "unavailable"
+$update_car_status = "UPDATE cars SET status = 'unavailable' WHERE id = ?";
+$update_stmt = $conn->prepare($update_car_status);
+$update_stmt->bind_param("i", $car_id);
+
+if ($update_stmt->execute()) {
+    echo json_encode(["success" => true, "message" => "Makinë e caktuar me sukses."]);
+} else {
+    echo json_encode(["success" => false, "message" => "Gabim gjatë përditësimit të statusit."]);
+}
 ?>

@@ -94,9 +94,8 @@ header("Pragma: no-cache");
         </tbody>
     </table>
 
-    <script src="adminPanel.js" defer></script>
-    <script src="assignCar.js" defer></script>
-    <script src="cars.js" defer></script>
+    <script src="adminPanel.js"></script>
+    <!-- <script src="cars.js"></script> -->
 
 </body>
 </html>

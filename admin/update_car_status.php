@@ -1,19 +1,28 @@
 <?php
-// Database connection
-include('database_connection.php');
+require_once('../DB-conn/database_connection.php'); // Lidhja me databazën
 
-// Get the data from the request
-$data = json_decode(file_get_contents("php://input"));
-$plate = $data->plate;
-$status = $data->status;
+header("Content-Type: application/json");
 
-// Update car status in the database
-$query = "UPDATE cars SET status = '$status' WHERE plate = '$plate'";
-$result = mysqli_query($conn, $query);
+// Lexo të dhënat nga kërkesa JSON
+$data = json_decode(file_get_contents("php://input"), true);
 
-if ($result) {
-    echo json_encode(["success" => true]);
+// Kontrollo nëse të dhënat janë të plota
+if (!isset($data['plate']) || !isset($data['status'])) {
+    echo json_encode(["success" => false, "message" => "Të dhëna të paplota."]);
+    exit();
+}
+
+$plate = $data['plate'];
+$status = $data['status'];
+
+// Përditëso statusin e makinës
+$update_query = "UPDATE cars SET status = ? WHERE car_plate = ?";
+$update_stmt = $conn->prepare($update_query);
+$update_stmt->bind_param("ss", $status, $plate);
+
+if ($update_stmt->execute()) {
+    echo json_encode(["success" => true, "message" => "Statusi i makinës u përditësua me sukses."]);
 } else {
-    echo json_encode(["success" => false, "error" => mysqli_error($conn)]);
+    echo json_encode(["success" => false, "message" => "Gabim gjatë përditësimit të statusit.", "error" => $conn->error]);
 }
 ?>

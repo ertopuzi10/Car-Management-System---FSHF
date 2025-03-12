@@ -1,13 +1,6 @@
 <?php
 
-//kredencialet e DB ne mysql
-$servername = "localhost"; 
-$username = 'root'; 
-$password = ""; 
-$dbname = "car_management"; 
-
-// Lidhja me DB
-$conn = new mysqli($servername, $username, $password, $dbname);
+require_once('../DB-conn/database_connection.php'); // Lidhja me databazën
 
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
